@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奔跑的少年</title>
+    <style>
+        .box1 {
+            width: 150px;
+            height: 174px;
+            background-image: url(../image/奔跑的少年.png);
+            animation: example 1s steps(6) infinite;
+        }
+        
+        @keyframes example {
+            from {
+                background-position: -20px 0;
+            }
+            to {
+                background-position: -900px 0;
+            }
+        }
+        
+        .box2 {
+            width: 63px;
+            height: 77px;
+            background-image: url(../image/people.png);
+            animation: people 1s steps(8) infinite;
+        }
+        
+        @keyframes people {
+            from {
+                background-position: 7px 0;
+            }
+            to {
+                background-position: 474px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1"></div>
+    <div class="box2"></div>
+</body>
+
+</html>
