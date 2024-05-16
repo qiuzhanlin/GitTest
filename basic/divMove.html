@@ -14,57 +14,34 @@
     </style>
     <script>
         window.onload = function(){
-            // 用键盘控制 div 移动
-            /* 
-                控制div移动两个要素 1.方向 2.速度
-            */
-            //获取box1对象
+            
+            // 获取box1
             var box1 = document.getElementById("box1");
-            //定义 speed 控制速度
-            var speed = 10;
-            //定义一个变量控制方向
-            var dir = 0;
-            // 创建一个定时器控制速度
-            setInterval(function(){
-                /*
-                编码 left 37
-                    top 38 
-                    right 39 
-                    bottom 40 
-                 */
-                 
-               switch(dir){
-                case 37:
-                    box1.style.left = box1.offsetLeft - speed + "px";
-                    break;
-                case 38:
-                    box1.style.top = box1.offsetTop - speed + "px";
-                    break;
-                case 39:
-                    box1.style.left = box1.offsetLeft + speed +"px";
-                    break;
-                case 40:
-                    box1.style.top = box1.offsetTop + speed + "px"; 
-               }
-            },30)
-            //绑定键盘事件
-            document.onkeydown = function(event){
+            box1.onmousedown = function(event){
+                //鼠标相关被box1全部捕获 一次性
+                //box1.setPointerCapture && box1.setPointerCapture();
                 event = event || window.event;
-                // 按着ctrl加速
-                if(event.ctrlKey){
-                    speed = 80;
+                var ox = event.clientX - box1.offsetLeft;
+                var oy = event.clientY - box1.offsetTop;
+                document.onmousemove = function(event){
+                    //兼容新
+                    event = window.event || event;
+                    // 鼠标坐标
+                    var left = event.clientX - ox;
+                    var top = event.clientY - oy;
+                    // 修改box1的位置
+                    box1.style.left = left + "px" ;
+                    box1.style.top = top + "px"; 
                 }
-                // 方向的值等于按键的值
-                dir= event.keyCode;
+                document.onmouseup = function(){
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                    //鼠标松开就不捕获
+                    //box1.releasePointerCapture && box1.releasePointerCapture();
+                }
+                return false;
             }
-            document.onkeyup = function(){
-                /* 
-                    松开按键方向没有
-                    松开ctrl之后变回 speed = 10 
-                */
-                dir = 0;
-                speed=10;
-            }
+
         }
     </script>
 </head>
